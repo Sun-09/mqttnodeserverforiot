@@ -1,0 +1,71 @@
+<!-- *This is the WebPage* -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-image: url(./images/12-129078_bulbs-data-src-light-bulb-hd-wallpapers-for.jpg); background-repeat: no-repeat;background-size: cover;">
+    <h1 style="padding: 20px;color:rgb(255, 255, 255);margin:20px 500px">Hello User. Welcome to IOT world</h1>
+    <div style="background-color: rgba(255, 255, 255, 0.2); width: 1000px; height: 500px;border-radius: 20px; margin: 0px 200px">
+        <button style="background-color: rgb(10, 116, 19);border-radius: 5px;color: aliceblue;font-size: 10px;padding: 10px;margin: 200px 250px;cursor: pointer;" id="button1">LED ON</button>
+        <button style="background-color: rgb(2, 89, 10);border-radius: 5px;color: aliceblue;font-size: 10px;padding: 10px;margin: 200px 160px;cursor: pointer;" id="button2">LED OFF</button>
+    
+    </div>
+
+
+
+<script>
+    let button1= document.getElementById("button1")
+    
+    let button2 = document.getElementById("button2")
+
+    button1.addEventListener('click',()=>{
+        console.log("button1 clicked");
+
+        postData('/button', { button_one_value: true })
+        .then((data) => {
+            console.log(data); 
+            
+         });
+    })
+
+    button2.addEventListener('click',()=>{
+        console.log("button2 clicked");
+        postData('/button', { button_one_value: false })
+        .then((data) => {
+            console.log(data); 
+         });
+    })
+
+
+
+async function postData(url = '', data = {}) {
+  
+  const response = await fetch(url, {
+    method: 'POST', 
+    mode: 'cors', 
+    cache: 'no-cache',
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow', 
+    referrerPolicy: 'no-referrer', 
+    body: JSON.stringify(data) 
+  });
+  return response.json(); 
+}
+
+
+</script>
+    
+
+
+   
+</body>
+
+</html>
