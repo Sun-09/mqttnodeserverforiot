@@ -14,7 +14,7 @@ const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 const host = 'tcp://91.121.93.94'
 
 app.use(express.json());
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'public2')))
 app.use('/about', express.static(path.join(__dirname, 'about')))
 app.use('/more', express.static(path.join(__dirname, 'more')))
 app.use('/contacts', express.static(path.join(__dirname, 'contacts')))
@@ -28,7 +28,7 @@ if(req.body.button_one_value === true){
         "status": true,
         "messege": "mqtt button1 is clicked"
       })
-    let sendMessage = "B";
+    let sendMessage = "P";
     client.publish('sonu', sendMessage, { qos: 0, retain: false })
 }
 else if(req.body.button_one_value === false){
@@ -36,9 +36,66 @@ else if(req.body.button_one_value === false){
         "status": true,
         "messege": "mqtt button2 is clicked"
       })
-    let sendMessage = "A";
+    let sendMessage = "Q";
     client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
 }
+
+else if(req.body.button_two_value === true){
+  res.send({
+      "status": true,
+      "messege": "mqtt button2 is clicked"
+    })
+  let sendMessage = "R";
+  client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
+}
+
+else if(req.body.button_two_value === false){
+  res.send({
+      "status": true,
+      "messege": "mqtt button2 is clicked"
+    })
+  let sendMessage = "S";
+  client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
+}
+
+else if(req.body.button_three_value === true){
+  res.send({
+      "status": true,
+      "messege": "mqtt button2 is clicked"
+    })
+  let sendMessage = "T";
+  client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
+}
+
+else if(req.body.button_three_value === false){
+  res.send({
+      "status": true,
+      "messege": "mqtt button2 is clicked"
+    })
+  let sendMessage = "U";
+  client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
+}
+
+else if(req.body.button_four_value === true){
+  res.send({
+      "status": true,
+      "messege": "mqtt button2 is clicked"
+    })
+  let sendMessage = "V";
+  client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
+}
+
+
+else if(req.body.button_four_value === false){
+  res.send({
+      "status": true,
+      "messege": "mqtt button2 is clicked"
+    })
+  let sendMessage = "W";
+  client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
+}
+
+
 
 
 

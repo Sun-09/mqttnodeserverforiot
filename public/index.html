@@ -8,8 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script>
+  let pass = prompt("Please enter valid passkey:", "Harry Potter");
+  while(pass != "kgecrsfo23"){
+    let pass = prompt("Please enter valid passkey:", "Harry Potter");
+    if(pass == "kgecrsfo23"){
+      break;
+    }
+  }
+</script>
 <body style="background-image: url(./images/12-129078_bulbs-data-src-light-bulb-hd-wallpapers-for.jpg); background-repeat: no-repeat;background-size: cover;">
-    <h1 style="padding: 20px;color:rgb(255, 255, 255);margin:20px 500px">Hello User. Welcome to IOT world</h1>
+    <h1 style="padding: 20px;color:rgb(255, 255, 255);text-align: center;">Hello <p id="demo" style="display: inline-block;"></p>Welcome to IOT world</h1>
     <div style="background-color: rgba(255, 255, 255, 0.2); width: 1000px; height: 500px;border-radius: 20px; margin: 0px 200px">
         <button style="background-color: rgb(10, 116, 19);border-radius: 5px;color: aliceblue;font-size: 10px;padding: 10px;margin: 200px 250px;cursor: pointer;" id="button1">LED ON</button>
         <button style="background-color: rgb(2, 89, 10);border-radius: 5px;color: aliceblue;font-size: 10px;padding: 10px;margin: 200px 160px;cursor: pointer;" id="button2">LED OFF</button>
@@ -19,13 +28,17 @@
 
 
 <script>
+    let user = prompt("Hello User Enter your name : ", "User");
+    
+
+    document.getElementById('demo').innerHTML = user;
+
     let button1= document.getElementById("button1")
     
     let button2 = document.getElementById("button2")
 
     button1.addEventListener('click',()=>{
         console.log("button1 clicked");
-
         postData('/button', { button_one_value: true })
         .then((data) => {
             console.log(data); 

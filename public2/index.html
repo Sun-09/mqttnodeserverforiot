@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>IOT-Website</title>
+    <script>
+        let pass = prompt("Enter Valid PassKey : ", "12345678");
+        while(pass!='12345678'){
+            pass = prompt("Enter Valid PassKey : ", "12345678");
+            if(pass=='12345678'){
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="link1">HOME</a>
+        <a href="#" class="link">ABOUT</a>
+        <a href="#" class="link">MORE</a>
+        <a href="#" class="link2">CONTACTS</a>
+    </div>
+    <h1 class="greetings">Hi <p id="user" class="username"></p> Welcome to IOT DashBoard</h1>
+
+    <div class="container">
+        <div class="subcontainer" >
+            <h1 id="temp">26 <p class="temp">C</p></h1>
+            
+            <h2 id="humidity">70<p class="humidity">%</p></h2>
+            
+        </div>
+        <div class="subcontainer" style="background-color: transparent;">
+            <div class="first_row_buttons">
+                <button class="button" id="buttn1">Device-1</button>
+                <button class="button" id="buttn2">Device-2</button>
+            </div>
+            <div class="second_row_buttons">
+                <button class="button" id="buttn3">Device-3</button>
+                <button class="button" id="buttn4">Device-4</button>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="footer">Presented by KGEC Robotics Society</h2>
+
+    <script>
+        user = prompt("Please Enter Your Name :- ", "Admin Boss");
+        let i = 0;
+        let str = "";
+        while(user[i] != ' '){
+            str = str + user[i];
+            i = i+1;
+        }
+        document.getElementById('user').innerHTML = str;
+
+        let button1 = document.getElementById('buttn1');
+        let button2 = document.getElementById('buttn2');
+        let button3 = document.getElementById('buttn3');
+        let button4 = document.getElementById('buttn4');
+        let p = 0;
+
+        button1.addEventListener('click', ()=>{
+            console.log("button-1 Clicked");
+            p++;
+            if(p%2 == 1){
+                document.getElementById('buttn1').style.backgroundColor = 'white';
+                document.getElementById('buttn1').style.color = 'blue';
+                postData('/button', { button_one_value: true })
+                .then((data) => {
+                 console.log(data); 
+            
+                });
+            }
+            else{
+                document.getElementById('buttn1').style.backgroundColor = 'cornflowerblue';
+                document.getElementById('buttn1').style.color = 'white'; 
+                postData('/button', { button_one_value: false })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+            
+
+        })
+        let q = 0;
+        button2.addEventListener('click', ()=>{
+            console.log("button-2 Clicked");
+            q++;
+            if(q%2 == 1){
+                document.getElementById('buttn2').style.backgroundColor = 'white';
+                document.getElementById('buttn2').style.color = 'blue';
+                postData('/button', { button_two_value: true })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+            else{
+                document.getElementById('buttn2').style.backgroundColor = 'cornflowerblue';
+                document.getElementById('buttn2').style.color = 'white'; 
+                postData('/button', { button_two_value: false })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+        })
+        let r = 0;
+        button3.addEventListener('click', ()=>{
+            console.log("button-3 Clicked");
+            r++;
+            if(r%2 == 1){
+                document.getElementById('buttn3').style.backgroundColor = 'white';
+                document.getElementById('buttn3').style.color = 'blue';
+                postData('/button', { button_three_value: true })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+            else{
+                document.getElementById('buttn3').style.backgroundColor = 'cornflowerblue';
+                document.getElementById('buttn3').style.color = 'white'; 
+                postData('/button', { button_three_value: false })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+        })
+        let s = 0;
+        button4.addEventListener('click', ()=>{
+            console.log("button-4 Clicked");
+            s++;
+            if(s%2 == 1){
+                document.getElementById('buttn4').style.backgroundColor = 'white';
+                document.getElementById('buttn4').style.color = 'blue';
+                postData('/button', { button_four_value: true })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+            else{
+                document.getElementById('buttn4').style.backgroundColor = 'cornflowerblue';
+                document.getElementById('buttn4').style.color = 'white'; 
+                postData('/button', { button_four_value: false })
+                .then((data) => {
+                console.log(data); 
+            
+                });
+            }
+        })
+
+    async function postData(url = '', data = {}) {
+  
+    const response = await fetch(url, {
+        method: 'POST', 
+        mode: 'cors', 
+        cache: 'no-cache',
+        credentials: 'same-origin', 
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        redirect: 'follow', 
+        referrerPolicy: 'no-referrer', 
+        body: JSON.stringify(data) 
+    });
+    return response.json(); 
+    }
+
+    </script>
+</body>
+</html>
