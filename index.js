@@ -5,6 +5,10 @@ const path = require('path');
 const mqtt = require("mqtt");
 // var client = mqtt.connect('mqtt://test.mosquitto.org');
 const app = express()
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 port = process.env.PORT || 3000;
 
 let value;
@@ -14,7 +18,11 @@ const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 const host = 'tcp://91.121.93.94'
 
 app.use(express.json());
-app.use('/', express.static(path.join(__dirname, 'public2')))
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.use('/folder', express.static(path.join(__dirname, 'public2')))
 app.use('/about', express.static(path.join(__dirname, 'about')))
 app.use('/more', express.static(path.join(__dirname, 'more')))
 app.use('/contacts', express.static(path.join(__dirname, 'contacts')))
@@ -95,6 +103,10 @@ else if(req.body.button_four_value === false){
   client.publish('sonu', sendMessage, { qos: 0, retain: false }) 
 }
 
+else{
+  console.log("O");
+}
+
 
 
 
@@ -160,6 +172,37 @@ client.on('message', function (topic, message, packet) {
   console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
   // console.log("\n"+JSON.stringify(packet))
 })
+
+client.on('connect', function () {
+  console.log('client connected:' + clientId)
+  // console.log("");
+  client.subscribe('weather', { qos: 0 },(sub_message)=>{
+      console.log("Message From Server : "+sub_message);
+      client.on('message', function (topic, message, packet) {
+        console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
+        msg = message.toString();
+        io.on('connection', (socket) => {
+          
+          io.broadcast.emit('Weather', msg);
+          
+          
+        });
+        // console.log("\n"+JSON.stringify(packet))
+      })
+    })
+
+    
+
+})
+
+
+
+
+
+
+
+
+
 //client on
 client.on('close', function () {
   console.log(clientId + ' disconnected')

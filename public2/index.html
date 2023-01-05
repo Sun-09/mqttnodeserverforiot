@@ -27,9 +27,9 @@
 
     <div class="container">
         <div class="subcontainer" >
-            <h1 id="temp">26 <p class="temp">C</p></h1>
+            <h1 id="temp"><p class="temp">C</p></h1>
             
-            <h2 id="humidity">70<p class="humidity">%</p></h2>
+            <h2 id="humidity"><p class="humidity">%</p></h2>
             
         </div>
         <div class="subcontainer" style="background-color: transparent;">
@@ -45,7 +45,9 @@
     </div>
 
     <h2 class="footer">Presented by KGEC Robotics Society</h2>
+    
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js" integrity="sha512-nYuHvSAhY5lFZ4ixSViOwsEKFvlxHMU2NHts1ILuJgOS6ptUmAGt/0i5czIgMOahKZ6JN84YFDA+mCdky7dD8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         user = prompt("Please Enter Your Name :- ", "Admin Boss");
         let i = 0;
@@ -172,6 +174,17 @@
     });
     return response.json(); 
     }
+
+    const URL = '/';
+
+    var socket = io(URL);
+
+    socket.on('Weather', function(msg){
+        weather = msg;
+        document.getElementById('temp').innerHTML = weather;
+        console.log(weather)
+
+    })
 
     </script>
 </body>
