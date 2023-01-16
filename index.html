@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>IOT-Website</title>
-    <script>
+    <link rel="shortcut icon" href="./images/_home.png">
+    <!-- <script>
         let pass = prompt("Enter Valid PassKey : ", "12345678");
         while(pass!='1234567##'){
             pass = prompt("Enter Valid PassKey : ", "12345678");
@@ -14,7 +14,7 @@
                 break;
             }
         }
-    </script>
+    </script> -->
     <style>
                 *{
             padding: 0;
@@ -28,6 +28,7 @@
             align-items: center;
             border: 10px solid transparent;
             background-color: #1c1c94;
+            width:100vw;
             
         }
 
@@ -140,6 +141,96 @@
             background-color: white;
             color:cornflowerblue;
         }
+
+        .graph {
+            border-radius: 6px;
+            width: 100px;
+            height: 30px;
+            color: white;
+            background-color: #7979e3;
+            border: 0.5px solid white;
+            margin: 40px 285px;
+        }
+        .graph:hover{
+            color:#7979e3;
+            background-color: white;
+            border: 0.5px solid blueviolet;
+        }
+
+        @media(max-width: 500px){
+            .header{
+                display: none;
+            }
+            .greetings{
+                font-size: 20px;
+                margin: -30px 100px 0px 0px;
+            }
+            .container{
+                width: 500px;
+            }
+            .subcontainer {
+                width: 250px;
+                height: 250px;
+                margin: 0px 0px 300px -40px;
+                display: block;
+                border-radius: 150px;
+            }
+            .temp{
+                font-size: 40px;
+                font-weight: bolder;
+            }
+            #temp{
+                font-size: 40px;
+                margin: -70px 0px 0px 0px;
+                font-weight: bolder;
+            }
+            #humidity{
+                font-size: 30px;
+            }
+            .humidity{
+                font-size: 30px;
+            }
+            
+            .graph {
+                font-size: 8px;
+                width: 60px;
+                height: 25px;
+                margin: 30px 90px;
+                border: none;
+              }
+
+            .button{
+                width:80px;
+                height: 80px;
+                font-size: 10px;
+                border-radius: 15px;
+                padding: 20px;
+            }
+            .first_row_buttons{
+                display: flex;
+                width: 250px;
+                height: 200px;
+                margin: 260px 0px 0px -390px;
+            }
+            .second_row_buttons{
+                
+                display: flex;
+                width: 250px;
+                height: 200px;
+                margin: -80px 0px 0px -390px;
+            }
+            .footer{
+                font-size: 13px;
+                margin: -20px 80px 0px 0px;
+            }
+            .body{
+                width: 100vw;
+            }
+            }
+            
+            
+
+        
     </style>
 </head>
 <body>
@@ -153,9 +244,12 @@
 
     <div class="container">
         <div class="subcontainer" >
-            <h1 id="temp"><p class="temp">C</p></h1>
+            <h1 id="temp"> 20<p class="temp">C</p></h1>
             
-            <h2 id="humidity"><p class="humidity">%</p></h2>
+            <h2 id="humidity">90<p class="humidity">%</p></h2>
+
+            <button id="graph" class="graph">Show Graph</button>
+            
             
         </div>
         <div class="subcontainer" style="background-color: transparent;">
@@ -174,15 +268,16 @@
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js" integrity="sha512-nYuHvSAhY5lFZ4ixSViOwsEKFvlxHMU2NHts1ILuJgOS6ptUmAGt/0i5czIgMOahKZ6JN84YFDA+mCdky7dD8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-        user = prompt("Please Enter Your Name :- ", "Admin Boss");
-        let i = 0;
-        let str = "";
-        while(user[i] != ' '){
-            str = str + user[i];
-            i = i+1;
-        }
-        document.getElementById('user').innerHTML = str;
+        // user = prompt("Please Enter Your Name :- ", "Admin Boss");
+        // let i = 0;
+        // let str = "";
+        // while(user[i] != ' '){
+        //     str = str + user[i];
+        //     i = i+1;
+        // }
+        // document.getElementById('user').innerHTML = str;
 
         let button1 = document.getElementById('buttn1');
         let button2 = document.getElementById('buttn2');
@@ -332,6 +427,10 @@
     let data = "hello i am from client";
     socket.emit("hello_server",data);
   }, 2000);
+
+  graph = document.getElementById('graph');
+
+  
 
   
 
