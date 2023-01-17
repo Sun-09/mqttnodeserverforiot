@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 const host = 'tcp://91.121.93.94'
 
+
 let SOCKET_CLIENT;
 
 
