@@ -184,7 +184,7 @@ try {
       });
       client.on('message', function (topic, message, packet) {
         // console.log('Received Message:= ' + message.toString() + '\nOn topic:= ' + topic)
-      //   console.log("\n"+JSON.stringify(packet))
+        // console.log("\n"+JSON.stringify(packet))
        if(topic === "esp32_mqtt_tempvalue"){
           SOCKET_CLIENT.emit("weather", message.toString());
        }
